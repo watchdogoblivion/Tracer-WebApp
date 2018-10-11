@@ -1,0 +1,29 @@
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### Security Config ###
+src/main/java/com/sdorilas/tracer/tracerapp/SecurityConfig.java
+target/classes/com/sdorilas/tracer/tracerapp/SecurityConfig.class
