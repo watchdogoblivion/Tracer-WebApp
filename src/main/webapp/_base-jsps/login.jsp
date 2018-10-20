@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<link type="text/css" rel="stylesheet" href="styles/index.css">
+		<link type="text/css" rel="stylesheet" href="css/index.css">
 		<title>Please Login</title>
 	</head>
 	<body>
@@ -24,7 +24,6 @@
 						        You have been logged out. 
 						    </c:when>
 							<c:otherwise>
-						        aa OK 
 						    </c:otherwise>
 						</c:choose>
 					</div>
@@ -38,6 +37,12 @@
 					</div>
 				</fieldset>
 			</form>
+		</div>
+		<div class="container" style="background-color:#f1f1f1">
+		    <span class="">Forgot <a href="#">password?</a></span>
+		</div>
+		<div class="container signin">
+		    <p>Create a free Account <a href="/Register">Sign up</a>.</p>
 		</div>
 	</body>
 </html>

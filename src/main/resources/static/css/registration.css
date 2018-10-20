@@ -1,0 +1,23 @@
+label{
+	font-size:24px;
+	color: green;
+}
+/* [type="text"] /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/; */
+input
+{
+    font-size:24px;
+}
+
+tr>td {
+  padding-bottom: 1em;
+}
+
+.warning{
+	font-size:20px;
+	color: red;
+	white-space: pre;
+}
+
+.registerbtn{
+	background-color: green;
+}

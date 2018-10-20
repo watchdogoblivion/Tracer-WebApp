@@ -7,7 +7,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Tracer</title>
-		<link type="text/css" rel="stylesheet" href="styles/index.css">
+		<link type="text/css" rel="stylesheet" href="css/index.css">
 	</head>
 	<body>
 		Hello! guy

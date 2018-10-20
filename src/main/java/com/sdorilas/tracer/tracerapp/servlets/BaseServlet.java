@@ -1,4 +1,4 @@
-package com.sdorilas.tracer.tracerapp.controllers;
+package com.sdorilas.tracer.tracerapp.servlets;
 
 import java.io.IOException;
 
