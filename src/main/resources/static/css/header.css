@@ -1,0 +1,29 @@
+.dropdown-menu {
+	min-width: 100%;
+}
+
+select {
+	min-width: 100%;
+}
+
+option:hover {
+	background-color: blue;
+}
+
+#nav-style {
+	margin-top: auto;
+	background-color: lightgray;
+	padding-bottom: 0.5%;
+}
+
+#col-4-style{
+	text-align: left; 
+}
+
+#col-12-style{
+	margin-top: auto;
+	padding: 0%;
+}
+#brand-color{
+	color: blue;
+}

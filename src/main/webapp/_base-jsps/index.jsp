@@ -10,6 +10,8 @@
 		<link type="text/css" rel="stylesheet" href="css/index.css">
 	</head>
 	<body>
+		<jsp:include page="header.jsp"></jsp:include>
 		Hello! guy
+		<jsp:include page="footer.jsp"></jsp:include>
 	</body>
 </html>

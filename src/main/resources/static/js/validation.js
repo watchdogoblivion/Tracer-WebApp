@@ -19,7 +19,7 @@ function validateFirstname() {
 	var re = /^[A-Za-z-']{1,32}$/;
 	if (!re.test(firstname)) {
 		document.querySelector('#firstname_warning').textContent = "Invalid first name, please use Letters, dashes, and apostrophes.";
-		return false;
+		return true;
 	} else {
 		document.querySelector('#firstname_warning').textContent = "";
 		return true;
@@ -31,7 +31,7 @@ function validateLastname() {
 	var re = /^[A-Za-z-']{1,32}$/;
 	if (!re.test(lastname)) {
 		document.querySelector('#lastname_warning').textContent = "Invalid last name, please use Letters, dashes, and apostrophes.";
-		return false;
+		return true;
 	} else {
 		document.querySelector('#lastname_warning').textContent = "";
 		return true;
@@ -43,13 +43,13 @@ function validateUsername(array) {
 	var re = /^[A-Za-z0-9]{3,20}$/;
 	if (!re.test(username)) {
 		document.querySelector('#username_warning').textContent = "Invalid username, please use letters and numbers";
-		return false;
+		return true;
 	}
 	for ( var index in array) {
 		if (document.form1.username.value == array[index]) {
 			document.querySelector('#username_warning').textContent = "Username "
 					+ array[index] + " already exists";
-			return false;
+			return true;
 		}
 	}
 	document.querySelector('#username_warning').textContent = "";
@@ -61,7 +61,7 @@ function validateEmail() {
 	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	if (!re.test(email)) {
 		document.querySelector('#email_warning').textContent = "Invalid email address";
-		return false;
+		return true;
 	} else {
 		document.querySelector('#email_warning').textContent = "";
 		return true;
@@ -78,7 +78,7 @@ function validatePassword() {
 		document.querySelector('#password_warning').textContent = "Required" + newline + "At least one number, one lowercase and one uppercase letter." 
 			+ newline + "At least six characters.";
 		password = "";
-		return false;
+		return true;
 	} else {
 		document.querySelector('#password_warning').textContent = "";
 		password = "";
@@ -92,7 +92,7 @@ function validatePasswordEquality() {
 	if (password !== psw_repeat) {
 		document.querySelector('#psw_repeat_warning').textContent = "Passwords do not match";
 		password = ""; psw_repeat = "";
-		return false;
+		return true;
 	} else {
 		document.querySelector('#psw_repeat_warning').textContent = "";
 		password = ""; psw_repeat = "";

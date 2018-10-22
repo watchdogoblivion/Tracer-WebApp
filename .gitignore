@@ -27,5 +27,4 @@
 ### Security Config ###
 src/main/java/com/sdorilas/tracer/tracerapp/SecurityConfig.java
 target/classes/com/sdorilas/tracer/tracerapp/SecurityConfig.class
-src/main/resources/application.properties
-target/classes/application.properties
+*.properties

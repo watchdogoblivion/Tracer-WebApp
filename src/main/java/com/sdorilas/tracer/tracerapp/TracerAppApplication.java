@@ -13,6 +13,7 @@ public class TracerAppApplication extends SpringBootServletInitializer {
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(TracerAppApplication.class);
+		
 	}
 
 	public static void main(String[] args) {
