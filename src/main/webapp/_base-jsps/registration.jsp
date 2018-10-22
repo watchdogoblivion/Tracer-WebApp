@@ -8,10 +8,10 @@
 		<meta charset="UTF-8">
 		<title>Registration</title>
 		<link type="text/css" rel="stylesheet" href="css/registration.css">
-		<% List<User> users = new JspDAO().getUsers(request); %>
 	</head>
 	<body id="bg-color">
 		<jsp:include page="header.jsp"></jsp:include>
+		<% List<User> users = new JspDAO().getUsers(request); %>
 		<script>
 			var jsArray = [];
 			<% for(User user:users){%> 

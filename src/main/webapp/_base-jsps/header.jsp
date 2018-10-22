@@ -42,6 +42,7 @@
 	                            </form>
 	                        </nav> 
 	                        <a href="/Login">Login</a>&emsp;
+	                        <a href="/Logout">Logout</a>&emsp;
 	                    	<a href="/Register">Register</a>&emsp;
 	                    </div>
 	                </div> 

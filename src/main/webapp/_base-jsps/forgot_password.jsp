@@ -15,21 +15,30 @@
 			<div class = "card card-width">
 				<div class = "container">
 					<c:choose>
-						<c:when test="true">
-					        <form name="f" action="/Login" method="POST">
+						<c:when test="${TEST1}">
+							<% List<User> users = new JspDAO().getUsers(request); %>
+							<% System.out.println(users); %>
+							<script>
+								var jsArray = [];
+								<% for(User user:users){%> 
+									jsArray.push("<%= user.getEmail() %>")
+								<% } %>
+								disableEnter();
+							</script>
+					        <form name="form1" action="/Forgot-Password" method="POST" onsubmit="return validateForm(jsArray);">
 								<fieldset>
 									<legend>Enter Email Address</legend>
 									<label id="email_warning"><b>${WARNING}</b></label> 
 									<label for="email">Email</label> 
-									<input type="text" id="email" name="email" /> 
+									<input type="text" placeholder="Enter Email" name="email" onblur="emailExists(jsArray)" required /> 
 									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 									<div class="form-actions">
-										<button type="submit" class="btn">Log in</button>
+										<button type="submit" class="btn">Submit</button>
 									</div>
 								</fieldset>
 							</form>
 					    </c:when>
-						<c:when test="${param.sent}">
+						<c:when test="${TEST2}">
 					        Password has been sent!
 					         <div class="container signin">
 							    <p><a href="/Login">Sign in</a></p>
@@ -42,5 +51,6 @@
 			</div>
 		</div>
 		<jsp:include page="footer.jsp"></jsp:include>
+		<script type="text/javascript" src="js/forgot_password.js"></script>
 	</body>
 </html>
