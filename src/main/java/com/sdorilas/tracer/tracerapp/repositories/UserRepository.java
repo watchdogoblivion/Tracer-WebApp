@@ -9,5 +9,5 @@ import com.sdorilas.tracer.tracerapp.dto.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
-
+	User findByUsername(String username);
 }

@@ -18,8 +18,7 @@ public class BaseController {
 	}
 	
 	@GetMapping("/Logout")
-	public String logout() {
+	public String logout(){
 		return "_base-jsps/login.jsp?logout=true";
 	}
-	
 }

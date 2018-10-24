@@ -17,7 +17,6 @@
 					<c:choose>
 						<c:when test="${TEST1}">
 							<% List<User> users = new JspDAO().getUsers(request); %>
-							<% System.out.println(users); %>
 							<script>
 								var jsArray = [];
 								<% for(User user:users){%> 
@@ -25,7 +24,7 @@
 								<% } %>
 								disableEnter();
 							</script>
-					        <form name="form1" action="/Forgot-Password" method="POST" onsubmit="return validateForm(jsArray);">
+					        <form name="form1" action="<%=request.getContextPath()%>/Forgot-Password" method="POST" onsubmit="return validateForm(jsArray);">
 								<fieldset>
 									<legend>Enter Email Address</legend>
 									<label id="email_warning"><b>${WARNING}</b></label> 
@@ -41,7 +40,7 @@
 						<c:when test="${TEST2}">
 					        Password has been sent!
 					         <div class="container signin">
-							    <p><a href="/Login">Sign in</a></p>
+							    <p><a href="<%=request.getContextPath()%>/Login">Sign in</a></p>
 							  </div> 
 					    </c:when>
 						<c:otherwise>

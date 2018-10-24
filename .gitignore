@@ -25,6 +25,6 @@
 /.nb-gradle/
 
 ### Security Config ###
-src/main/java/com/sdorilas/tracer/tracerapp/SecurityConfig.java
-target/classes/com/sdorilas/tracer/tracerapp/SecurityConfig.class
+src/main/java/com/sdorilas/tracer/tracerapp/security/SecurityConfig.java
+target/classes/com/sdorilas/tracer/tracerapp/security/SecurityConfig.class
 *.properties

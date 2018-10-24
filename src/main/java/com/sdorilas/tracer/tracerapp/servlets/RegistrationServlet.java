@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.sdorilas.tracer.tracerapp.dto.User;
 import com.sdorilas.tracer.tracerapp.repositories.UserRepository;
@@ -23,7 +25,7 @@ public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Autowired
 	private UserRepository userRepository;
-	private String warning = "";
+	String warning;
 	String newline = "\r\n";
 	String bullet = "&#8226; ";
        
@@ -34,7 +36,14 @@ public class RegistrationServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+    
+    public void init(ServletConfig config) throws ServletException {
+	    super.init(config);
+	    SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(
+	    		this,
+	      config.getServletContext());
+	  }
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -47,6 +56,7 @@ public class RegistrationServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		warning="";
 		User user = createUser(request, response);
 		validateFirstname(user);
 		validateLastname(user);
@@ -57,20 +67,22 @@ public class RegistrationServlet extends HttpServlet {
 		boolean check = warning.equals("");
 		RequestDispatcher requestDispatcher;
 		if (check) {
-			requestDispatcher = request.getRequestDispatcher("_base-jsps/login.jsp");
+			user.setPassword(request.getParameter("password"));
+			userRepository.save(user);
+			response.sendRedirect(request.getContextPath() + "/Login");
 		}else {
 			request.setAttribute("USER", user);
 			request.setAttribute("WARNINGS", warning);
-			warning = "";
 			requestDispatcher = request.getRequestDispatcher("_base-jsps/registration.jsp");
+			requestDispatcher.forward(request, response);
 		}
-		requestDispatcher.forward(request, response);
+		
 	}
 
 	private void validatePassword(HttpServletRequest request, HttpServletResponse response) {
 		String password = request.getParameter("password");
 		String psw_repeat = request.getParameter("psw_repeat");
-		String regex = "/^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{6,}$/";
+		String regex = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{6,}";
 		if (!password.matches(regex)) {
 			warning+= "Password requires:" + newline + bullet + "At least one number " + newline + bullet +"At least one lowercase "
 					+ newline + bullet + "At least one uppercase letter." 
@@ -79,8 +91,8 @@ public class RegistrationServlet extends HttpServlet {
 		if(!password.equals(psw_repeat)) {
 			warning+= "Passwords do not match.";
 		}
-		password = "";
-		psw_repeat = "";
+		password = null;
+		psw_repeat = null;
 	}
 
 	private void validateEmail(User user) {
@@ -88,10 +100,16 @@ public class RegistrationServlet extends HttpServlet {
 		if (!user.getEmail().matches(regex)) {
 			warning+="Invalid Email" + newline;
 		}
+		List<User> users = userRepository.findAll();
+		for (User u: users) {
+			if (user.getEmail().equals(u.getEmail())) {
+				warning+="Email " + user.getEmail() + " already exists" + newline;
+			}
+		}
 	}
 
 	private void validateUsername(User user) {
-		String regex = "/^[A-Za-z-']{1,32}$/";
+		String regex = "[A-Za-z0-9]{3,32}";
 		if (!user.getUsername().matches(regex)) {
 			warning+="Invalid username, please use only letters and numbers" + newline;
 		}
@@ -104,15 +122,15 @@ public class RegistrationServlet extends HttpServlet {
 	}
 
 	private void validateLastname(User user) {
-		String regex = "/^[A-Za-z-']{1,32}$/";
-		if (!user.getLast_name().matches(regex)) {
+		String regex = "[A-Za-z-']{1,20}";
+		if (!user.getLastName().matches(regex)) {
 			warning+="Invalid last name, please use Letters, dashes, and apostrophes." + newline;
 		}
 	}
 
 	private void validateFirstname(User user) {
-		String regex = "/^[A-Za-z-']{1,32}$/";
-		if (!user.getFirst_name().matches(regex)) {
+		String regex = "[A-Za-z-']{1,20}";
+		if (!user.getFirstName().matches(regex)) {
 			warning+="Invalid first name, please use Letters, dashes, and apostrophes." + newline;
 		}
 	}

@@ -8,33 +8,38 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 @Entity
 @Table(name="users")
 public class User {
   
 	@Id
     private String username;
-	private String first_name;
-	private String last_name;
+	private String firstName;
+	private String lastName;
 	private String email;
     private String password;
-    private boolean enabled = true;;
+    private boolean enabled = true;
+    private boolean accountNonExpired = true;
+    private boolean accountNonLocked = true;
+    private boolean credentialsNonExpired = true;
  
     @OneToMany(mappedBy="user")
     private List<Authority> authorities = new ArrayList<>();
     
-    public User(String username, String first_name, String last_name, String email, String password, List<Authority> authorities) {
+    public User(String username, String password, List<Authority> authorities) {
 		super();
 		this.setUsername(username);
 		this.setPassword(password);
 		this.setAuthorities(authorities);
 	}
     
-    public User(String username, String first_name, String last_name, String email, String password) {
+    public User(String username, String firstName, String lastName, String email, String password) {
 		super();
 		this.setUsername(username);
-		this.setFirst_name(first_name);
-		this.setLast_name(last_name);
+		this.setFirstName(firstName);
+		this.setLastName(lastName);
 		this.setEmail(email);
 		this.setPassword(password);
 	}
@@ -42,27 +47,11 @@ public class User {
 	public User() {
 	}
     
-    @Override
+	@Override
 	public String toString() {
-		return "User [firstname=" + first_name + ", last_name=" + last_name + 
-				", username=" + username + ", password=" + password + ", email=" 
-				+ email + ", enabled=" + enabled + "]";
-	}
-	
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
+		return "User [username=" + username + ", first name=" + firstName + ", last name=" + lastName + ", email="
+				+ email + ", password=" + password + ", enabled=" + enabled + ", accountNonExpired=" + accountNonExpired
+				+ ", accountNonLocked=" + accountNonLocked + ", credentialsNonExpired=" + credentialsNonExpired + "]";
 	}
 
 	public List<Authority> getAuthorities() {
@@ -89,20 +78,28 @@ public class User {
 		this.username = username;
 	}
 
-	public String getFirst_name() {
-		return first_name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getLast_name() {
-		return last_name;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = new BCryptPasswordEncoder(12).encode(password);
 	}
 
 	public String getEmail() {
@@ -111,5 +108,37 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public boolean isAccountNonExpired() {
+		return accountNonExpired;
+	}
+
+	public void setAccountNonExpired(boolean accountNonExpired) {
+		this.accountNonExpired = accountNonExpired;
+	}
+
+	public boolean isAccountNonLocked() {
+		return accountNonLocked;
+	}
+
+	public void setAccountNonLocked(boolean accountNonLocked) {
+		this.accountNonLocked = accountNonLocked;
+	}
+
+	public boolean isCredentialsNonExpired() {
+		return credentialsNonExpired;
+	}
+
+	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+		this.credentialsNonExpired = credentialsNonExpired;
 	}
 }

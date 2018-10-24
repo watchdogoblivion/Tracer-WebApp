@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.sdorilas.tracer.tracerapp.dto.Mail;
 import com.sdorilas.tracer.tracerapp.dto.User;
@@ -38,6 +40,13 @@ public class ForgotPasswordServlet extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public void init(ServletConfig config) throws ServletException {
+	    super.init(config);
+	    SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(
+	    		this,
+	      config.getServletContext());
+	  }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -62,8 +71,8 @@ public class ForgotPasswordServlet extends HttpServlet {
 		RequestDispatcher requestDispatcher;
 		if (check) {
 			emailPassword(email);
-			request.setAttribute("TEST2", true);
 			request.setAttribute("TEST1", false);
+			request.setAttribute("TEST2", true);
 			requestDispatcher = request.getRequestDispatcher("_base-jsps/forgot_password.jsp");
 		} else {
 			request.setAttribute("TEST1", true);
@@ -89,7 +98,7 @@ public class ForgotPasswordServlet extends HttpServlet {
 		mail.setSubject("Password Retrieval");
 		mail.setContent("Your new password is " + password);
 		emailService.sendSimpleMessage(mail);
-		password = "";
+		password = null;
 	}
 
 	private String generatePassword() {

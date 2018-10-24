@@ -16,10 +16,10 @@ function disableEnter() {
 
 function validateFirstname() {
 	var firstname = document.form1.firstname.value;
-	var re = /^[A-Za-z-']{1,32}$/;
+	var re = /^[A-Za-z-']{1,20}$/;
 	if (!re.test(firstname)) {
 		document.querySelector('#firstname_warning').textContent = "Invalid first name, please use Letters, dashes, and apostrophes.";
-		return true;
+		return false;
 	} else {
 		document.querySelector('#firstname_warning').textContent = "";
 		return true;
@@ -28,44 +28,50 @@ function validateFirstname() {
 
 function validateLastname() {
 	var lastname = document.form1.lastname.value;
-	var re = /^[A-Za-z-']{1,32}$/;
+	var re = /^[A-Za-z-']{1,20}$/;
 	if (!re.test(lastname)) {
 		document.querySelector('#lastname_warning').textContent = "Invalid last name, please use Letters, dashes, and apostrophes.";
-		return true;
+		return false;
 	} else {
 		document.querySelector('#lastname_warning').textContent = "";
 		return true;
 	}
 }
 
-function validateUsername(array) {
+function validateUsername(usernameArray) {
 	var username = document.form1.username.value;
-	var re = /^[A-Za-z0-9]{3,20}$/;
+	var re = /^[A-Za-z0-9]{3,32}$/;
 	if (!re.test(username)) {
 		document.querySelector('#username_warning').textContent = "Invalid username, please use letters and numbers";
-		return true;
+		return false;
 	}
-	for ( var index in array) {
-		if (document.form1.username.value == array[index]) {
+	for ( var index in usernameArray) {
+		if (document.form1.username.value == usernameArray[index]) {
 			document.querySelector('#username_warning').textContent = "Username "
-					+ array[index] + " already exists";
-			return true;
+					+ usernameArray[index] + " already exists";
+			return false;
 		}
 	}
 	document.querySelector('#username_warning').textContent = "";
 	return true;
 }
 
-function validateEmail() {
+function validateEmail(emailArray) {
 	var email = document.form1.email.value;
 	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	if (!re.test(email)) {
 		document.querySelector('#email_warning').textContent = "Invalid email address";
-		return true;
-	} else {
-		document.querySelector('#email_warning').textContent = "";
-		return true;
+		return false;
+	} 
+	for ( var index in emailArray) {
+		if (document.form1.email.value == emailArray[index]) {
+			document.querySelector('#email_warning').textContent = "Email "
+					+ emailArray[index] + " already exists";
+			return false;
+		}
 	}
+	document.querySelector('#email_warning').textContent = "";
+	return true;
 }
 
 function validatePassword() {
@@ -78,10 +84,10 @@ function validatePassword() {
 		document.querySelector('#password_warning').textContent = "Required" + newline + "At least one number, one lowercase and one uppercase letter." 
 			+ newline + "At least six characters.";
 		password = "";
-		return true;
+		return false;
 	} else {
 		document.querySelector('#password_warning').textContent = "";
-		password = "";
+		password = null;
 		return true;
 	}
 }
@@ -91,18 +97,18 @@ function validatePasswordEquality() {
 	var psw_repeat = document.form1.psw_repeat.value;
 	if (password !== psw_repeat) {
 		document.querySelector('#psw_repeat_warning').textContent = "Passwords do not match";
-		password = ""; psw_repeat = "";
-		return true;
+		password = null; psw_repeat = null;
+		return false;
 	} else {
 		document.querySelector('#psw_repeat_warning').textContent = "";
-		password = ""; psw_repeat = "";
+		password = null; psw_repeat = null;
 		return true;
 	}
 }
 
-function validateForm(array){
-	if(validateFirstname() && validateLastname() && validateUsername(array) && 
-			validateEmail() && validatePassword() && validatePasswordEquality()){
+function validateForm(usernameArray, emailArray){
+	if(validateFirstname() && validateLastname() && validateUsername(usernameArray) && 
+			validateEmail(emailArray) && validatePassword() && validatePasswordEquality()){
 		return true;
 	}
 	return false;

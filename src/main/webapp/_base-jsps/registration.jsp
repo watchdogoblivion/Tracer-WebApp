@@ -13,14 +13,16 @@
 		<jsp:include page="header.jsp"></jsp:include>
 		<% List<User> users = new JspDAO().getUsers(request); %>
 		<script>
-			var jsArray = [];
+			var usernameArray = [];
+			var emailArray = [];
 			<% for(User user:users){%> 
-				jsArray.push("<%= user.getUsername() %>")
+				usernameArray.push("<%= user.getUsername() %>")
+				emailArray.push("<%= user.getEmail() %>")
 			<% } %>
 			disableEnter();
 		</script>
 		
-		<form name="form1" action="/Register" method="POST" onsubmit="return validateForm(jsArray);">
+		<form name="form1" action="<%=request.getContextPath()%>/Register" method="POST" onsubmit="return validateForm(jsArray);">
 		  <div class = "app-card-container">
 			<div class = "card card-width">
 				<div class = "container">
@@ -32,28 +34,28 @@
 					  <tr>
 					  	<td>
 					  		<label for="firstname"><b>First Name</b></label>&emsp;
-					  		<input type="text" placeholder="Enter First Name" name="firstname" value = "${USER.getFirst_name()}" onblur="validateFirstname()" pattern="[A-Za-z-']{2,32}" required>
+					  		<input type="text" placeholder="Enter First Name" name="firstname" value = "${USER.getFirstName()}" onblur="validateFirstname()" pattern="[A-Za-z-']{2,32}" required>
 					  	</td>
 					  </tr>
 					  <tr><td><label class="warning" id="lastname_warning"><b></b></label></td></tr>
 					  <tr>
 					  	<td>
 					  		<label for="lastname"><b>Last Name</b></label>&emsp;
-					  		<input type="text" placeholder="Enter Last Name" name="lastname"  value = "${USER.getLast_name()}" onblur="validateLastname()" pattern="[A-Za-z' -]{2,32}" required>
+					  		<input type="text" placeholder="Enter Last Name" name="lastname"  value = "${USER.getLastName()}" onblur="validateLastname()" pattern="[A-Za-z' -]{2,32}" required>
 					  	</td>
 					  </tr>
 					  <tr><td><label class="warning" id="username_warning"><b></b></label></td></tr>
 					  <tr>
 					  	<td>
 					  		<label for="username"><b>User Name</b></label>&emsp;
-					  		<input type="text" placeholder="Enter User Name" name="username"  value = "${USER.getUsername()}" onblur="validateUsername(jsArray)" pattern="[A-Za-z0-9]{1,16}" required>
+					  		<input type="text" placeholder="Enter User Name" name="username"  value = "${USER.getUsername()}" onblur="validateUsername(usernameArray)" pattern="[A-Za-z0-9]{1,16}" required>
 					  	</td>
 					  </tr>
 					  <tr><td><label class="warning" id="email_warning"><b></b></label></td></tr>
 					  <tr>
 					  	<td>
 					  		<label for="email"><b>Email</b></label>&emsp;
-					  		<input type="text" placeholder="Enter Email" name="email"  value = "${USER.getEmail()}" onblur="validateEmail()" required>
+					  		<input type="text" placeholder="Enter Email" name="email"  value = "${USER.getEmail()}" onblur="validateEmail(emailArray)" required>
 					  	</td>
 					  </tr>
 					  <tr><td><label class="warning" id="password_warning"><b></b></label></td></tr>
@@ -76,12 +78,12 @@
 				    <button type="submit" class="registerbtn">Register</button>
 				  </div>
 				  <div class="container signin">
-				    <p>Already have an account? <a href="/Login">Sign in</a>.</p>
+				    <p>Already have an account? <a href="<%=request.getContextPath()%>/Login">Sign in</a>.</p>
 				  </div>
 				</div>
 			</div>
 		</form>
-		<script type="text/javascript" src="js/validation.js"></script>
+		<script type="text/javascript" src="js/validate_register.js"></script>
 		<jsp:include page="footer.jsp"></jsp:include>
 	</body>
 </html>

@@ -1,3 +1,4 @@
+<%@ page import="com.sdorilas.tracer.tracerapp.services.*, java.util.* "%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -14,12 +15,16 @@
 		<div class = "app-card-container">
 			<div class = "card card-width">
 				<div class = "container">
-					<form name="f" action="/Login" method="POST">
+					<form name="f" action="<%=request.getContextPath()%>/Login" method="POST">
 						<fieldset>
 							<legend>Please Login</legend>
-			
 							<div class="alert alert-error">
 								<c:choose>
+									<c:when test="<%= MyUserDetailsService.blocked %>">
+									    <label id="blocked"><b>
+			                        		To many login attempts have been made. Try again in 1 minute.
+			                        	</b></label> 
+								    </c:when>
 									<c:when test="${param.error}">
 								        Invalid username and password. 
 								    </c:when>
@@ -41,8 +46,8 @@
 						</fieldset>
 					</form>
 					<div class="container">
-						<p>Forgot <a href="/Forgot-Password">Password</a>?</p>
-					    <p>Create a free Account <a href="/Register">Sign up</a>.</p>
+						<p>Forgot <a href="<%=request.getContextPath()%>/Forgot-Password">Password</a>?</p>
+					    <p>Create a free Account <a href="<%=request.getContextPath()%>/Register">Sign up</a>.</p>
 					</div>
 				</div>
 			</div>

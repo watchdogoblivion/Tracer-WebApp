@@ -16,11 +16,16 @@ import com.sdorilas.tracer.tracerapp.repositories.UserRepository;
 public class JspDAO {
 
 	@Autowired
-	public UserRepository userRepository;
-
-	public List<User> getUsers(HttpServletRequest request) {
+	UserRepository userRepository;
+	private JspDAO userimpl;
+	
+	public void setup(HttpServletRequest request) {
 		ApplicationContext ac = RequestContextUtils.findWebApplicationContext(request);
-		JspDAO userimpl = (JspDAO) ac.getBean("jspdao");
+		userimpl = (JspDAO) ac.getBean("jspdao");
+	}
+	
+	public List<User> getUsers(HttpServletRequest request) {
+		setup(request);
 		List<User> users = userimpl.userRepository.findAll();
 		return users;
 	}
