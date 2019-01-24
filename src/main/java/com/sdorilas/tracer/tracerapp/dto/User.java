@@ -28,6 +28,15 @@ public class User {
     @OneToMany(mappedBy="user")
     private List<Authority> authorities = new ArrayList<>();
     
+    @OneToMany(mappedBy="user")
+    private List<Question> questions = new ArrayList<>();
+    
+    @OneToMany(mappedBy="user")
+    private List<Answer> answers = new ArrayList<>();
+    
+    @OneToMany(mappedBy="user")
+    private List<Reply> replies = new ArrayList<>();
+    
     public User(String username, String password, List<Authority> authorities) {
 		super();
 		this.setUsername(username);
@@ -141,4 +150,29 @@ public class User {
 	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
 		this.credentialsNonExpired = credentialsNonExpired;
 	}
+
+	public List<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
+	}
+
+	public List<Answer> getAnswers() {
+		return answers;
+	}
+
+	public void setAnswers(List<Answer> answers) {
+		this.answers = answers;
+	}
+
+	public List<Reply> getReplies() {
+		return replies;
+	}
+
+	public void setReplies(List<Reply> replies) {
+		this.replies = replies;
+	}
+	
 }

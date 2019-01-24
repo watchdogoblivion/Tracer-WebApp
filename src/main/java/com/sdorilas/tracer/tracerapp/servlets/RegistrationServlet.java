@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import com.sdorilas.tracer.tracerapp.dto.Authority;
 import com.sdorilas.tracer.tracerapp.dto.User;
 import com.sdorilas.tracer.tracerapp.repositories.UserRepository;
 
@@ -68,6 +69,7 @@ public class RegistrationServlet extends HttpServlet {
 		RequestDispatcher requestDispatcher;
 		if (check) {
 			user.setPassword(request.getParameter("password"));
+			user.getAuthorities().add(new Authority("USER"));
 			userRepository.save(user);
 			response.sendRedirect(request.getContextPath() + "/Login");
 		}else {

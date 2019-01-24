@@ -27,15 +27,13 @@ public class Authority {
 		super();
 	}
 	
-	public Authority(Long id, String authority) {
+	public Authority(String authority) {
 		super();
-		this.id = id;
 		this.authority = authority;
 	}
 
-	public Authority(Long id, String authority, User user) {
+	public Authority(String authority, User user) {
 		super();
-		this.id = id;
 		this.authority = authority;
 		this.setUser(user);
 	}

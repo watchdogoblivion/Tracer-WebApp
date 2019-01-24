@@ -38,7 +38,7 @@
 	                    <div class="collapse navbar-collapse float-right" id="navbarSupportedContent2" >
 	                    	<c:if test='<%= new HeaderHelper().showSearchBar(request) %>'>
 		                        <nav class="nav" > 
-		                            <form class="form-inline my-2 my-lg-0" action="/search" method="get" accept-charset="utf-8">
+		                            <form class="form-inline my-2 my-lg-0" action="/Search" method="get" accept-charset="utf-8">
 		                                &emsp;
 		                                <input class="searchfield" id="searchbox" placeholder="Search..." aria-label="Search"  name="search_field">
 		                                &emsp;
@@ -46,6 +46,10 @@
 		                                &emsp;
 		                            </form>
 		                        </nav>
+		                        <form class="form-inline" style="display:inline" action="/AskQuestion" method="GET">
+								    <input type="submit" style = "color: blue; border-color: blue; " value="Ask a Question" />
+								</form>
+								&emsp;
 	                        </c:if> 
 	                        <c:if test='<%= new HeaderHelper().showLogin(request) %>'>
 	                        	<a href="<%=request.getContextPath()%>/Login">Login</a>&emsp;
