@@ -8,13 +8,16 @@
 		<title>Ask a Question</title>
 	</head>
 	<body>
-		<jsp:include page="header.jsp"></jsp:include>
+		<jsp:include page="../_base-jsps/header.jsp"></jsp:include>
 			<div class = "app-card-container">
 				<div class = "card card-width">
 					<div class = "container">
 						<form class="my-2 my-lg-0" action="/AskQuestion" method="POST" >
 							<div>
-								<textarea rows="6" cols="50" id="question" name="question" placeholder="Enter text here..."></textarea>
+								<textarea rows="3" cols="50" id="tags" name="tags" placeholder="Seperate tags by comas"></textarea>
+			                </div>
+							<div>
+								<textarea rows="6" cols="50" id="question" name="question" placeholder="Enter question here..."></textarea>
 			                </div>
 			                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			                <div class="form-actions">
@@ -24,6 +27,6 @@
 		            </div>
 	            </div>
 	        </div>
-		<jsp:include page="footer.jsp"></jsp:include>
+		<jsp:include page="../_base-jsps/footer.jsp"></jsp:include>
 	</body>
 </html>

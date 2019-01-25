@@ -1,12 +1,17 @@
 package com.sdorilas.tracer.tracerapp.dto;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.JoinColumn;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -25,8 +30,14 @@ public class User {
     private boolean accountNonLocked = true;
     private boolean credentialsNonExpired = true;
  
-    @OneToMany(mappedBy="user")
-    private List<Authority> authorities = new ArrayList<>();
+    @ManyToMany(fetch=FetchType.EAGER)
+    @JoinTable( 
+        name = "users_authorities", 
+        joinColumns = @JoinColumn (
+          name = "user_id", referencedColumnName = "username"), 
+        inverseJoinColumns = @JoinColumn(
+          name = "authority_id", referencedColumnName = "id")) 
+    private Collection<Authority> authorities = new ArrayList<>();
     
     @OneToMany(mappedBy="user")
     private List<Question> questions = new ArrayList<>();
@@ -63,7 +74,7 @@ public class User {
 				+ ", accountNonLocked=" + accountNonLocked + ", credentialsNonExpired=" + credentialsNonExpired + "]";
 	}
 
-	public List<Authority> getAuthorities() {
+	public Collection<Authority> getAuthorities() {
 		return authorities;
 	}
 
@@ -74,7 +85,7 @@ public class User {
 	public String[] getRoles(List<Authority> authorities) {
 		String[] roles_String= {};
 		for(int i = 0; i < authorities.size(); i++) {
-			roles_String[i] = authorities.get(i).getAuthority();
+			roles_String[i] = authorities.get(i).getName();
 		}
 		return roles_String;
 	}

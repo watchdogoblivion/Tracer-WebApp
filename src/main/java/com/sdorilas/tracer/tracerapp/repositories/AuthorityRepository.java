@@ -6,5 +6,5 @@ import com.sdorilas.tracer.tracerapp.dto.Authority;
 
 
 public interface AuthorityRepository extends JpaRepository<Authority, Integer> {
-
+	Authority findByName(String name);
 }

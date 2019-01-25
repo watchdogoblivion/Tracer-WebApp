@@ -21,8 +21,18 @@ public class Question {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String question;
+	private String tags;
 	private LocalDateTime dateTime; 
 	
+	
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
+
 	@OneToMany(mappedBy="question")
     private List<Reply> replies = new ArrayList<>();
 	
@@ -36,7 +46,8 @@ public class Question {
 	public Question() {
 	}
 
-	public Question(String question) {
+	public Question(String question, String tag) {
+		this.tags = tag;
 		this.question = question;
 	}
 

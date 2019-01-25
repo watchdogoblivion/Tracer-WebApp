@@ -1,12 +1,14 @@
 package com.sdorilas.tracer.tracerapp.dto;
 
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,31 +18,29 @@ public class Authority {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String username;
-    private String authority;
+    private String name;
     
-    @ManyToOne
-    @JoinColumn(name="username", nullable=false, insertable=false, updatable=false)
-    private User user;
+    @ManyToMany(mappedBy = "authorities", fetch=FetchType.EAGER)
+    private Collection<User> users;
 
 	public Authority() {
 		super();
 	}
 	
-	public Authority(String authority) {
+	public Authority(String name) {
 		super();
-		this.authority = authority;
+		this.name = name;
 	}
 
-	public Authority(String authority, User user) {
+	public Authority(String name, Collection<User> users) {
 		super();
-		this.authority = authority;
-		this.setUser(user);
+		this.name = name;
+		this.setUsers(users);
 	}
 
 	@Override
 	public String toString() {
-		return "Role [id=" + id + ", authority=" + authority + ", users=" + getUser() + "]";
+		return "Authority [id=" + id + ", name=" + name + ", users=" + getUsers() + "]";
 	}
 
 	public Long getId() {
@@ -51,29 +51,20 @@ public class Authority {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
+	public Collection<User> getUsers() {
+		return users;
 	}
 
-
-	public void setUser(User user) {
-		this.user = user;
+	public void setUsers(Collection<User> users) {
+		this.users = users;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getName() {
+		return name;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getAuthority() {
-		return authority;
-	}
-
-	public void setAuthority(String authority) {
-		this.authority = authority;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

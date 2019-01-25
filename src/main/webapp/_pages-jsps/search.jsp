@@ -7,8 +7,8 @@
 		<title>Questions</title>
 	</head>
 	<body>
-		<jsp:include page="header.jsp"></jsp:include>
+		<jsp:include page="../_base-jsps/header.jsp"></jsp:include>
 			Data here
-		<jsp:include page="footer.jsp"></jsp:include>
+		<jsp:include page="../_base-jsps/footer.jsp"></jsp:include>
 	</body>
 </html>

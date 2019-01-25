@@ -18,3 +18,8 @@ body{
 #b{
 	color: blue;
 }
+
+.table-cust{
+	border-collapse:separate;
+    border-spacing:0 10px;
+}

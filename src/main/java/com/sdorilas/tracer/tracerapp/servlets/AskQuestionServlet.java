@@ -34,7 +34,7 @@ public class AskQuestionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("_base-jsps/ask_question.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("_pages-jsps/ask_question.jsp");
 		requestDispatcher.forward(request, response);
 	}
 
@@ -45,7 +45,8 @@ public class AskQuestionServlet extends HttpServlet {
 		String username = request.getUserPrincipal().getName();
 		User user = uR.findByUsername(username);
 		String q = request.getParameter("question");
-		Question question = new Question(q);
+		String t = request.getParameter("tags");
+		Question question = new Question(q,t);
 		question.setUser(user);
 		LocalDateTime ldt = LocalDateTime.now();
 		question.setDateTime(ldt);
