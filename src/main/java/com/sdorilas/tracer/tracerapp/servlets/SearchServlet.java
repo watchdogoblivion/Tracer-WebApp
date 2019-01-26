@@ -1,6 +1,7 @@
 package com.sdorilas.tracer.tracerapp.servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,18 +10,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.sdorilas.tracer.tracerapp.dto.Question;
+import com.sdorilas.tracer.tracerapp.repositories.QuestionRepository;
+
 /**
  * Servlet implementation class Search
  */
 @WebServlet("/Search")
 public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	@Autowired
+	QuestionRepository qR;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("_base-jsps/search.jsp");
+		String query = request.getParameter("search_field");
+		List<Question> questions = qR.RetrieveByQuery(query);
+		request.setAttribute("Questions", questions);
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("_pages-jsps/search.jsp");
 		requestDispatcher.forward(request, response);
 	}
 

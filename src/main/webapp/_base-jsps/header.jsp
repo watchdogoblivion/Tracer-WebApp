@@ -38,9 +38,9 @@
 	                    <div class="collapse navbar-collapse float-right" id="navbarSupportedContent2" >
 	                    	<c:if test='<%= new HeaderHelper().showSearchBar(request) %>'>
 		                        <nav class="nav" > 
-		                            <form class="form-inline my-2 my-lg-0" action="/Search" method="get" accept-charset="utf-8">
+		                            <form class="form-inline my-2 my-lg-0" action="/Search" method="GET" accept-charset="utf-8">
 		                                &emsp;
-		                                <input class="searchfield" id="searchbox" placeholder="Search..." aria-label="Search"  name="search_field">
+		                                <input class="searchfield" id="search_field" placeholder="Search..." aria-label="Search"  name="search_field">
 		                                &emsp;
 		                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		                                &emsp;

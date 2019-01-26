@@ -21,4 +21,8 @@ public interface QuestionRepository extends JpaRepository<Question, Integer>{
 	@Query(value="SELECT * FROM questions ORDER BY date_time DESC LIMIT 10",
 			nativeQuery = true)
 	List<Question> findLastTen();
+	
+	@Query(value="SELECT * FROM questions WHERE MATCH (tags) AGAINST (?1 IN NATURAL LANGUAGE MODE);",
+			nativeQuery = true)
+	List<Question> RetrieveByQuery(String query);
 }
