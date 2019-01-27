@@ -40,7 +40,8 @@
 		                        <nav class="nav" > 
 		                            <form class="form-inline my-2 my-lg-0" action="/Search" method="GET" accept-charset="utf-8">
 		                                &emsp;
-		                                <input class="searchfield" id="search_field" placeholder="Search..." aria-label="Search"  name="search_field">
+		                                <input class="searchfield"  placeholder="Search..." aria-label="Search"  name="search_field">
+		                                <input type="hidden" name="Selection" value="Default"/>
 		                                &emsp;
 		                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		                                &emsp;

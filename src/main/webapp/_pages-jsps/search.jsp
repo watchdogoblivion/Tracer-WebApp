@@ -15,21 +15,30 @@ java.time.format.DateTimeFormatter, com.sdorilas.tracer.tracerapp.helpers.*"%>
 			<div class = "app-card-container">
 				<div class = "card card-width">
 					<div class = "container container-custom">
+						<div style="padding: 1%">Questions</div>
 						<table class="table-cust">
-							<div style="padding: 1%">Questions</div>
-							<%List<Question> questions = (List<Question>)request.getAttribute("Questions");
-							DateTimeFormatter formatter; 
-							formatter = DateTimeFormatter.ofPattern("MMMM dd yyyy", Locale.US);%>
+							<%List<Question> questions = (List<Question>)request.getAttribute("Questions");%>
 							<% for(Question question:questions){ %>
 								<tr >
 									<td class="td-custom" >
-										<div style="min-width: 1000px; width: 100%"><b id="b">Question:</b> <%= new IndexHelper().line_limiter(request, question.getQuestion(), 250) %></div>
+										<div style="min-width: 1000px; width: 100%"><b id="b">Question:</b> <%= new ApplicationHelper().line_limiter(request, question.getQuestion(), 250) %></div>
 										<div><b>By User:</b> <%= question.getUser().getUsername()%></div>
-										<div><b>Created:</b> <%= question.getDateTime().format(formatter)%></div>
+										<div><b>Created:</b> <%= question.getDateTime().format(new ApplicationHelper().getFormatter())%></div>
 									</td>
 								</tr>
 							<%} %>
 						</table>
+						<input type="hidden" name="Selection" />
+						<input type="hidden" name="Page" />
+						<nav aria-label="Page navigation example">
+						  <ul class="pagination">
+						  	<%= new SearchHelper().jumpPrevious(request) %>
+						  	<%= new SearchHelper().previous(request) %>
+						    <%= new SearchHelper().goTo(request) %>
+						    <%= new SearchHelper().next(request) %>
+						    <%= new SearchHelper().jumpNext(request) %>
+						  </ul>
+						</nav>
 					</div>
 				</div>
 			</div>

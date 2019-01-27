@@ -12,7 +12,7 @@
 			<div class = "app-card-container">
 				<div class = "card card-width">
 					<div class = "container">
-						<form class="my-2 my-lg-0" action="/AskQuestion" method="POST" >
+						<form class="my-2 my-lg-0" action="<%=request.getContextPath()%>/AskQuestion" method="POST" >
 							<div>
 								<textarea rows="3" cols="50" id="tags" name="tags" placeholder="Seperate tags by comas"></textarea>
 			                </div>

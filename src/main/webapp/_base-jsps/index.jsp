@@ -20,12 +20,12 @@ java.time.format.DateTimeFormatter, com.sdorilas.tracer.tracerapp.helpers.*"%>
 			<div class = "app-card-container">
 				<div class = "card card-width">
 					<div class = "container container-custom">
+						<div style="padding: 1%">Recent Questions</div>
 						<table class="table-cust">
-							<div style="padding: 1%">Questions</div>
 							<% for(Question question:questions){ %>
 								<tr >
 									<td class="td-custom" >
-										<div style="min-width: 1000px; width: 100%"><b id="b">Question:</b> <%= new IndexHelper().line_limiter(request, question.getQuestion(), 250) %></div>
+										<div style="min-width: 1000px; width: 100%"><b id="b">Question:</b> <%= new ApplicationHelper().line_limiter(request, question.getQuestion(), 250) %></div>
 										<div><b>By User:</b> <%= question.getUser().getUsername()%></div>
 										<div><b>Created:</b> <%= question.getDateTime().format(formatter)%></div>
 									</td>

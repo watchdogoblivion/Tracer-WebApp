@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Pageable;
 
 import com.sdorilas.tracer.tracerapp.dto.Question;
 
@@ -22,7 +23,7 @@ public interface QuestionRepository extends JpaRepository<Question, Integer>{
 			nativeQuery = true)
 	List<Question> findLastTen();
 	
-	@Query(value="SELECT * FROM questions WHERE MATCH (tags) AGAINST (?1 IN NATURAL LANGUAGE MODE);",
+	@Query(value="SELECT * FROM questions WHERE MATCH (tags) AGAINST (?1 IN NATURAL LANGUAGE MODE) ",
 			nativeQuery = true)
-	List<Question> RetrieveByQuery(String query);
+	List<Question> RetrieveByQuery(String query, Pageable pageable);
 }
