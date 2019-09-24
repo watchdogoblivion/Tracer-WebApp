@@ -1,4 +1,4 @@
 language: java
 
 script:
-  - mvn sonar:sonar -Dsonar.projectKey=maven-test -Dsonar.organization=watchdogoblivion-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
+  - mvn sonar:sonar -Dsonar.projectKey=maven-test -Dsonar.organization=watchdogoblivion_Tracer-WebApp -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
